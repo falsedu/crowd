@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 
@@ -47,14 +48,20 @@ public class CrowdExceptionResolver {
 
     }
     @ExceptionHandler(value = MySqlException1.class)
-    public ModelAndView resolveException(MySqlException1 exception, HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public ModelAndView resolveException1(MySqlException1 exception, HttpServletRequest request, HttpServletResponse response) throws IOException {
         String viewName="admin-add";
         return  commonResolve(viewName,exception,request,response);
 
     }
     @ExceptionHandler(value = MySqlException2.class)
-    public ModelAndView resolveException(MySqlException2 exception, HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public ModelAndView resolveException2(MySqlException2 exception, HttpServletRequest request, HttpServletResponse response) throws IOException {
         String viewName="system-error";
+        return  commonResolve(viewName,exception,request,response);
+
+    }
+    @ExceptionHandler(value = RoleNAmeException.class)
+    public ModelAndView resolveException3(RoleNAmeException exception, HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String viewName="";
         return  commonResolve(viewName,exception,request,response);
 
     }

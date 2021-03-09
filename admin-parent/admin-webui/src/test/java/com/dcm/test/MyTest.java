@@ -1,9 +1,11 @@
 package com.dcm.test;
 
 import com.dcm.crowd.entity.Admin;
+import com.dcm.crowd.entity.Role;
 import com.dcm.crowd.mapper.AdminMapper;
 
 
+import com.dcm.crowd.mapper.RoleMapper;
 import com.dcm.crowd.service.api.AdminService;
 import com.dcm.crowd.service.impl.AdminServiceImpl;
 import org.junit.Test;
@@ -29,6 +31,16 @@ public class MyTest {
     private AdminMapper adminMapper;
     @Autowired
     private    AdminService adminService;
+    @Autowired
+    private RoleMapper roleMapper;
+    @Test
+    public void test6(){
+        Role role=new Role();
+        for(int i=0;i<200;i++){
+            role.setName("role"+(i+1));
+            roleMapper.insert(role);
+        }
+    }
 
     @Test
     public void test3(){
