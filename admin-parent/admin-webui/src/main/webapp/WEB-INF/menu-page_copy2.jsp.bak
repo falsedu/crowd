@@ -4,16 +4,26 @@
 <%@include file="/WEB-INF/include-head.jsp" %>
 <link rel="stylesheet" href="ztree/zTreeStyle.css"/>
 <script type="text/javascript" src="ztree/jquery.ztree.all-3.5.min.js"></script>
-<script type="text/javascript" src="crowd/my-menu.js"></script>
 <script type="text/javascript">
     $(function () {
-        menudisplay();
+        // $(".list-group-item").click(function(){
+        //     if ( $(this).find("ul") ) {
+        //         $(this).toggleClass("tree-closed");
+        //         if ( $(this).hasClass("tree-closed") ) {
+        //             $("ul", this).hide("fast");
+        //         } else {
+        //             $("ul", this).show("fast");
+        //         }
+        //     }
+        // });
+
+        
+
+
+        //$.fn.zTree.init($("#treeDemo"), setting); //异步访问数据
 
 
 
-    });
-
-    function menudisplay() {
         $.ajax({
             "url": "menu/get/whole/tree.json",
             "type":"post",
@@ -22,23 +32,11 @@
                 var result = response.result;
                 if(result == "SUCCESS") {
                     console.log(response.data);
-                    // 2.创建 JSON 对象用于存储对 zTree 所做的设置
-                    var  setting = {
-                        "view": {
-                            "addDiyDom":myAddDiyDom,
-                            "addHoverDom":myAddHoverDom,
-                            "removeHoverDom":myRemoveHoverDom
-                        },
-                        "data":{
-                            "key":{
-                                "url":"menu类中不存在的属性名"
-                            }
-                        },
-
-                    };
-                    // 3.从响应体中获取用来生成树形结构的 JSON 数据
+                        // 2.创建 JSON 对象用于存储对 zTree 所做的设置
+                    var setting = {};
+                        // 3.从响应体中获取用来生成树形结构的 JSON 数据
                     var zNodes = response.data;
-                    // 4.初始化树形结构
+                        // 4.初始化树形结构
                     $.fn.zTree.init($("#treeDemo"), setting, zNodes);
                 } if
                 (result == "FAILED") {
@@ -49,10 +47,12 @@
 
 
         $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+    });
+
+
+    function myAddDiyDom(treeId,treeNode) {
+
     }
-
-
-
 </script>
 
 <body>
