@@ -1,0 +1,13 @@
+server:
+  port: 4100
+
+spring:
+  application:
+    name: authenticationConsumer
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:1000/eureka

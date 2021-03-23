@@ -2,11 +2,13 @@ package com.dcm.crowd.mvc.handler;
 
 
 import com.dcm.crowd.entity.Admin;
+import com.dcm.crowd.entity.Auth;
 import com.dcm.crowd.entity.Role;
 import com.dcm.crowd.service.api.RoleService;
 import com.dcm.crowd.util.ResultEntity;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +22,9 @@ public class RoleHandler {
     @Autowired
     private RoleService roleService;
 
+
+
+    @PreAuthorize("hasRole('部长')")
     @RequestMapping("/role/get/page/info.json")
     @ResponseBody
     public ResultEntity<PageInfo<Role>> getAll(@RequestParam(value = "pageNo",defaultValue = "1")Integer pageNo,
@@ -54,4 +59,6 @@ public class RoleHandler {
         roleService.removeRole(ids);
         return ResultEntity.successWithoutData();
     }
+
+
 }

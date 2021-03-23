@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="member-project-consumer" />
+        <module name="common-reverse" />
+        <module name="common-util" />
+        <module name="member-redis-provider" />
+        <module name="member-eureka" />
+        <module name="admin-component" />
+        <module name="member-mysql-provider" />
+        <module name="admin-entity" />
+        <module name="member-order-consumer" />
+        <module name="member-api" />
+        <module name="member-entity" />
+        <module name="member-authentitcation-consumer" />
+        <module name="admin-webui" />
+        <module name="member-zuul" />
+        <module name="member-pay-consumer" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel target="8">
+      <module name="admin-component" target="1.8" />
+      <module name="admin-entity" target="1.8" />
+      <module name="admin-parent" target="1.8" />
+      <module name="admin-webui" target="1.8" />
+      <module name="common-reverse" target="1.8" />
+      <module name="common-util" target="1.8" />
+      <module name="member-api" target="1.5" />
+      <module name="member-authentitcation-consumer" target="1.5" />
+      <module name="member-entity" target="1.5" />
+      <module name="member-eureka" target="1.5" />
+      <module name="member-mysql-provider" target="1.5" />
+      <module name="member-order-consumer" target="1.5" />
+      <module name="member-parent" target="1.5" />
+      <module name="member-pay-consumer" target="1.5" />
+      <module name="member-project-consumer" target="1.5" />
+      <module name="member-redis-provider" target="1.5" />
+      <module name="member-wureka" target="1.5" />
+      <module name="member-zuul" target="1.5" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

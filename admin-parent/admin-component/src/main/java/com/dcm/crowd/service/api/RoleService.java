@@ -1,5 +1,6 @@
 package com.dcm.crowd.service.api;
 
+import com.dcm.crowd.entity.Auth;
 import com.dcm.crowd.entity.Role;
 import com.github.pagehelper.PageInfo;
 
@@ -14,4 +15,10 @@ public interface RoleService {
     int updateRole(Role role);
 
     void removeRole(List<Integer> ids);
+
+    List<Role> getAssignedRole(Integer adminId);
+
+    List<Role> getUnAssignedRole(Integer adminId);
+
+
 }

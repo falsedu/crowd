@@ -9,6 +9,124 @@
     $(function () {
         menudisplay();
 
+        $("#treeDemo").on("click",".addBtn",function () {
+            $("#pid").val(this.id);
+
+            $("#menuAddModal").modal("show");
+
+        });
+        $("#menuSaveBtn").click(function () {
+            var pid=$("#pid").val();
+            var name=$.trim($("#menuAddModal [name=name]").val());
+            var url = $.trim($("#menuAddModal [name=url]").val());
+            var icon = $("#menuAddModal [name=icon]:checked").val();
+
+            // alert(pid);
+            $.ajax({
+                url:"menu/save.json",
+                data:{
+                    "pid":pid,
+                    "name":name,
+                    "url":url,
+                    "icon":icon
+                },
+                type:"post",
+
+                dataType:"json",
+                success:function (resp) {
+                    if(resp.result=="SUCCESS"){
+                        menudisplay();
+                    }
+                    else if(resp.result=="FAILED"){
+                        layer.msg(resp.message);
+                    }
+                    $("#menuAddModal").modal("hide");
+
+                    $("#menuResetBtn").click();
+                }
+            })
+        })
+
+        $("#treeDemo").on("click",".removeBtn",function () {
+            // alert(this.id);
+            $("#removeId").val(this.id);
+            $("#menuConfirmModal").modal("show");
+
+        });
+
+        $("#confirmBtn").click(function(){
+
+            $.ajax({
+                url:"menu/remove.json",
+                data:{
+                    "id":$("#removeId").val()
+                },
+                type:"post",
+                dataType:"json",
+                success:function (resp) {
+                    if(resp.result=="SUCCESS"){
+                        menudisplay();
+                    }
+                    else if(resp.result=="FAILED"){
+                        layer.msg(resp.message);
+                    }
+                    $("#menuConfirmModal").modal("hide");
+
+
+                }
+
+            })
+        })
+
+        $("#treeDemo").on("click",".editBtn",function () {
+            // alert(this.id);
+            $("#editId").val(this.id);
+           var zTreeObj=$.fn.zTree.getZTreeObj("treeDemo");
+           var key="id";
+           var value=this.id;
+           var currentNode=zTreeObj.getNodeByParam(key,value);
+           $("#menuEditModal [name=name]").val(currentNode.name);
+           $("#menuEditModal [name=url]").val(currentNode.url);
+            $("#menuEditModal [name=icon]").val([currentNode.icon]);
+            $("#menuEditModal").modal("show");
+
+        });
+
+        $("#menuEditBtn").click(function(){
+            var name=$("#menuEditModal [name=name]").val();
+            var url=$("#menuEditModal [name=url]").val();
+            var icon=$("#menuEditModal [name=icon]:checked").val();
+
+
+            // alert(icon);
+            $.ajax({
+                url:"menu/edit.json",
+                data:{
+                    "id":$("#editId").val(),
+                    "name":name,
+                    "url":url,
+                    "icon":icon
+
+                },
+                type:"post",
+                dataType:"json",
+                success:function (resp) {
+                    if(resp.result=="SUCCESS"){
+                        menudisplay();
+                    }
+                    else if(resp.result=="FAILED"){
+                        layer.msg(resp.message);
+                    }
+                    $("#menuEditModal").modal("hide");
+
+
+                }
+
+            })
+        })
+
+
+
 
 
     });
@@ -48,7 +166,7 @@
         });
 
 
-        $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+
     }
 
 
@@ -74,6 +192,10 @@
 </div>
 
 </div>
+
+<%@include file="/WEB-INF/modal-menu-add.jsp"%>
+<%@include file="/WEB-INF/modal-menu-confirm.jsp"%>
+<%@include file="/WEB-INF/modal-menu-edit.jsp"%>
 
 </body>
 </html>

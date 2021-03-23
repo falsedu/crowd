@@ -6,21 +6,27 @@ import com.dcm.crowd.constant.CrowdConstant;
 import com.dcm.crowd.entity.Admin;
 import com.dcm.crowd.exception.LoginFailedException;
 import com.dcm.crowd.service.api.AdminService;
+import com.dcm.crowd.util.ResultEntity;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.access.prepost.PreFilter;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 public class AdminHandler {
 
     @Autowired
     private AdminService adminService;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @RequestMapping("admin/do/login.html")
     public String login(@RequestParam("loginAcct") String loginAcct, @RequestParam("userPswd") String userPswd, HttpSession session){
@@ -66,9 +72,10 @@ public class AdminHandler {
 //        return "admin-page";
         return "redirect:/admin/get/page.html?pageNo="+pageNo+"&keyword="+keyword;
     }
+    @PreAuthorize("hasAnyAuthority('user:save')")
     @RequestMapping("admin/save.html")
     public String save(Admin admin) throws Exception {
-        admin.setUserPswd(CrowdUtil.md5(admin.getUserPswd()));
+        admin.setUserPswd(passwordEncoder.encode(admin.getUserPswd()));
         admin.setCreateTime(CrowdUtil.getSysDate());
         int i=adminService.saveAdmin(admin);
 
@@ -88,6 +95,16 @@ public class AdminHandler {
         adminService.updateAdmin(admin);
 
         return "redirect:/admin/get/page.html?pageNo="+pageNo+"&keyword="+keyword;
+    }
+
+
+    @PreFilter(value = "filterObject%2==0")
+    @ResponseBody
+    @RequestMapping("/admin/test/prefilter.json")
+    public ResultEntity<List<Integer>> saveList(@RequestBody List<Integer> valueList){
+
+
+        return ResultEntity.successWithData(valueList);
     }
 
 

@@ -1,8 +1,11 @@
 package com.dcm.crowd.service.impl;
 
+import com.dcm.crowd.entity.Auth;
+import com.dcm.crowd.entity.AuthExample;
 import com.dcm.crowd.entity.Role;
 import com.dcm.crowd.entity.RoleExample;
 import com.dcm.crowd.exception.RoleNAmeException;
+import com.dcm.crowd.mapper.AuthMapper;
 import com.dcm.crowd.mapper.RoleMapper;
 import com.dcm.crowd.service.api.RoleService;
 import com.github.pagehelper.PageHelper;
@@ -18,6 +21,8 @@ public class RoleServiceImpl implements RoleService {
 
     @Autowired
     private RoleMapper roleMapper;
+    @Autowired
+    private AuthMapper authMapper;
 
     @Override
     public PageInfo<Role> getAllByKeyword(Integer pageNo,Integer pageSize,String keyword){
@@ -66,6 +71,18 @@ public class RoleServiceImpl implements RoleService {
         }
 
     }
+
+    @Override
+    public List<Role> getAssignedRole(Integer adminId) {
+       return  roleMapper.getAssignedRole(adminId);
+    }
+
+    @Override
+    public List<Role> getUnAssignedRole(Integer adminId) {
+        return roleMapper.getUnAssignedRole(adminId);
+    }
+
+
 
 
 }

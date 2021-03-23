@@ -39,6 +39,7 @@
             <i class="glyphicon glyphicon-remove"></i> 尚筹网系统消息
         </h2>
         <h3 >${requestScope.exception.message}</h3>
+
         <button style="width: 150px;margin: 50px auto 0px auto" class="btn btn-lg btn-success btn-block">点我回到上一步</button>
 
 </div>

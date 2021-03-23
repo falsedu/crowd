@@ -13,9 +13,9 @@ function myAddHoverDom(treeId,treeNode){
     if($("#"+btnGroup).length>=1){
         return ;
     }
-    var addBtn = "<a id='"+treeNode.id+"' class='btn btn-info dropdown-toggle btn-xs' style='margin-left:10px;padding-top:0px;' href='#' title='addSubNode'>&nbsp;&nbsp;<i class='fa fa-fw fa-plus rbg '/></a>";
-    var removeBtn = "<a id='"+treeNode.id+"' class='btn btn-info dropdown-toggle btn-xs' style='margin-left:10px;padding-top:0px;' href='#' title='deleteNode'>&nbsp;&nbsp;<i class='fa fa-fw fa-times rbg '/></a>";
-    var editBtn = "<a id='"+treeNode.id+"' class='btn btn-info dropdown-toggle btn-xs' style='margin-left:10px;padding-top:0px;' href='#' title='editNode'>&nbsp;&nbsp;<i class='fa fa-fw fa-edit rbg '/></a>";
+    var addBtn = "<a id='"+treeNode.id+"' class='btn btn-info dropdown-toggle btn-xs addBtn'  style='margin-left:10px;padding-top:0px;'  title='addSubNode'>&nbsp;&nbsp;<i class='fa fa-fw fa-plus rbg '/></a>";
+    var removeBtn = "<a id='"+treeNode.id+"' class='btn btn-info dropdown-toggle btn-xs removeBtn'  style='margin-left:10px;padding-top:0px;'  title='deleteNode'>&nbsp;&nbsp;<i class='fa fa-fw fa-times rbg '/></a>";
+    var editBtn = "<a id='"+treeNode.id+"' class='btn btn-info dropdown-toggle btn-xs editBtn'  style='margin-left:10px;padding-top:0px;'  title='editNode'>&nbsp;&nbsp;<i class='fa fa-fw fa-edit rbg '/></a>";
     var level = treeNode.level;
 
     var btnHTML = "";

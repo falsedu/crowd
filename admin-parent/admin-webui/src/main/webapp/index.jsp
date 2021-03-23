@@ -207,5 +207,7 @@ new
 <br/>
 <button id="btn5" >点我弹框</button>
 
+<a href="admin/to/login/page.html">跳转到登录页面</a>
+
 </body>
 </html>

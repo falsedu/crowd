@@ -83,6 +83,18 @@ public class Menu {
         this.open = open;
     }
 
+    @Override
+    public String toString() {
+        return "Menu{" +
+                "id=" + id +
+                ", pid=" + pid +
+                ", name='" + name + '\'' +
+                ", url='" + url + '\'' +
+                ", icon='" + icon + '\'' +
+                ", children=" + children +
+                ", open=" + open +
+                '}';
+    }
 
     public Menu() {
     }

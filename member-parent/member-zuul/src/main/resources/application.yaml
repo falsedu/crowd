@@ -1,0 +1,31 @@
+server:
+  port: 80
+spring:
+  application:
+    name: zuulGateway
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:1000/eureka
+zuul:
+
+  routes:
+    crowd-portal:
+      service-id: authenticationConsumer
+      path: /**
+  ignored-services: "*"
+  sensitive-headers: "*"
+#      分析：
+#      1. 分析后得知/zuul的默认context-path是/zuul。
+#      2. 之所以在默认的情况下我们不加zuul也可以请求成功是因为它帮我们做了url的裁剪。
+#      （通俗的讲就是不加zuul.prefix=/zuul配置的话，以下两个url都可以请求成功
+#      * http://localhost:16000/consumer/consumers/1
+#      * http://localhost:16000/zuul/consumer/consumers/1）
+#
+#      解决：
+#      1. 将默认context-path设置为空：zuul.servlet-path=/
+#      2. 配置网关zuul的统一前缀:zuul.prefix=/zuul
+#      (如果没有生效的话重启zuul服务)
+
+
+

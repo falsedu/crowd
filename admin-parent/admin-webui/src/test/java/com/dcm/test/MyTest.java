@@ -36,7 +36,7 @@ public class MyTest {
     @Test
     public void test6(){
         Role role=new Role();
-        for(int i=0;i<200;i++){
+        for(int i=0;i<10;i++){
             role.setName("role"+(i+1));
             roleMapper.insert(role);
         }
@@ -64,10 +64,10 @@ logger.debug(admin.toString());
     public void test5(){
         Admin admin = new Admin();
          int count=0;
-        for (int i=1; i <= 200; i++) {
-            admin.setUserName("name"+i);
+        for (int i=1; i <= 10; i++) {
+            admin.setUserName("admin"+i);
             admin.setUserPswd("pswd"+i);
-            admin.setLoginAcct("loginAct"+i);
+            admin.setLoginAcct("admin"+i);
             admin.setEmail("email"+i);
             count+=adminMapper.insert(admin);
         }

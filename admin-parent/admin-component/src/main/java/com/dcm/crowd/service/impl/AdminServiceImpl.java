@@ -107,4 +107,22 @@ public class AdminServiceImpl implements AdminService {
         }
     }
 
+    @Override
+    public void saveAdminRoleRelationship(Integer adminId, List<Integer> roleIdList) {
+
+        adminMapper.deleteOLdRelationship(adminId);
+// 2.根据 roleIdList 和 adminId 保存新的关联关系
+        if(roleIdList != null && roleIdList.size() > 0) {
+            adminMapper.insertNewRelationship(adminId, roleIdList);
+        }
+    }
+
+    @Override
+    public Admin getAdminByLoginAcct(String loginAcct) {
+        AdminExample adminExample = new AdminExample();
+        adminExample.createCriteria().andLoginAcctEqualTo(loginAcct);
+        return adminMapper.selectByExample(adminExample).get(0);
+    }
+
+
 }
