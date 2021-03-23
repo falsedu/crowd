@@ -10,4 +10,8 @@ public class CrowdConstant {
     public static final String ATTR_NAME_LOGIN_ADMIN = "admin";
     public static final String MESSAGE_SYSTEM_LOGIN_NOT_UNIQUE = "系统错误，系统库中登陆账号不唯一";
     public static final String ATTR_NAME_PAGE_INFO = "pageInfo";
+    public static final String REDIS_CODE_PREFIX = "code_";
+    public static final String ATTR_NAME_MESSAGE = "message";
+    public static final Object MESSAGE_CODE_NOT_EXISTS = "验证码已经过期，请重新发送";
+    public static final Object MESSAGE_CODE_NOT_CORRECT = "验证码不正确，请重新输入";
 }

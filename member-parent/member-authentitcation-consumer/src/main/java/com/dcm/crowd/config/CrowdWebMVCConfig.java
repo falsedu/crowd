@@ -12,11 +12,14 @@ public class CrowdWebMVCConfig  implements WebMvcConfigurer {
 
 
         //浏览器访问地址
-        String urlPath="/auth/member/to/reg/page.html";
+        String urlPath="/auth/member/to/reg/page";
 
 
         //目标视图名称
         String viewName="member-reg";
         registry.addViewController(urlPath).setViewName(viewName);
+
+
+        registry.addViewController("/auth/member/to/login/page").setViewName("member-login");
     }
 }

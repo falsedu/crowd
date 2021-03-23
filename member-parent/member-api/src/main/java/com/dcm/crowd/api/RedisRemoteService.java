@@ -1,4 +1,4 @@
-package com.dcm.scrowd.api;
+package com.dcm.crowd.api;
 
 import com.dcm.crowd.util.ResultEntity;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.concurrent.TimeUnit;
 
-@FeignClient("/redisProvider")
+@FeignClient("redisProvider")
 public interface RedisRemoteService {
 
 

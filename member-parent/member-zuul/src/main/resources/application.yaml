@@ -27,5 +27,3 @@ zuul:
 #      2. 配置网关zuul的统一前缀:zuul.prefix=/zuul
 #      (如果没有生效的话重启zuul服务)
 
-
-
