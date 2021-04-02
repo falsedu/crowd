@@ -1,5 +1,9 @@
 package com.dcm.crowd;
 
+import com.aliyun.oss.OSS;
+import com.aliyun.oss.OSSClientBuilder;
+import com.aliyun.oss.common.comm.ResponseMessage;
+import com.aliyun.oss.model.PutObjectResult;
 import com.dcm.crowd.constant.CrowdConstant;
 import com.dcm.crowd.util.HttpUtils;
 import com.dcm.crowd.util.ResultEntity;
@@ -7,6 +11,10 @@ import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -15,6 +23,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 
 public class CrowdUtil {
@@ -101,7 +110,7 @@ public class CrowdUtil {
 
             StatusLine statusLine = response.getStatusLine();
 
-            // 状态码: 200 正常；400 URL无效；401 appCode错误； 403 次数用完； 500 API网管错误
+            // 状态码=200 正常；400 URL无效；401 appCode错误； 403 次数用完； 500 API网管错误
             int statusCode = statusLine.getStatusCode();
 
             String reasonPhrase = statusLine.getReasonPhrase();
@@ -120,6 +129,74 @@ public class CrowdUtil {
         }
 
     }
+
+    public static ResultEntity<String> upLoadFileToOSS(
+            String endpoint,
+            String accessKeyId,
+            String accesskeySecret,
+            InputStream inputStream,
+            String bucketName,
+            String bucketDomain,
+            String originalName
+    ){
+        OSS ossClient=new OSSClientBuilder().build(endpoint,accessKeyId,accesskeySecret);
+        String folderName=new SimpleDateFormat("yyyyMMdd").format(new Date());
+        String fileMainName= UUID.randomUUID().toString().replaceAll("-","");
+
+        String extensionName=originalName.substring(originalName.lastIndexOf("."));
+        String objectName=folderName+"/"+fileMainName+extensionName;
+        try{
+            PutObjectResult putObjectResult = ossClient.putObject(bucketName, objectName, inputStream);
+            ResponseMessage responseMessage = putObjectResult.getResponse();
+            if(responseMessage==null){
+                String ossFileAccessPath=bucketDomain+"/"+objectName;
+                return ResultEntity.successWithData(ossFileAccessPath);
+            }else{
+                int statusCode=responseMessage.getStatusCode();
+                String errorMessage=responseMessage.getErrorResponseAsString();
+
+                return ResultEntity.failed("当前响应状态码="+statusCode+" 错误信息="+errorMessage);
+            }
+
+        }catch(Exception e){
+            e.printStackTrace();
+
+
+            return ResultEntity.failed(e.getMessage());
+
+        }finally {
+            if(ossClient!=null){
+                ossClient.shutdown();
+            }
+        }
+
+
+
+    }
+
+//    public static void main(String[] args) throws FileNotFoundException {
+//        String  accessKeyId="LTAI5tEgHGM5QKja3QeYCigK";
+//        String  accessKeySecret="FV9xrHucpiKiXdZR6xlVxAcorZUNeZ";
+//        String  bucketDomain="http://dcmcrowd.oss-cn-shanghai.aliyuncs.com";
+//        String  endPoint="http://oss-cn-shanghai.aliyuncs.com";
+//        String  bucketName="dcmcrowd";
+//
+//
+//
+//
+//
+//
+//File file=new File("C:/Users/22945/Pictures/Saved Pictures/yzhh.jpg");
+//
+//        InputStream inputStream=new FileInputStream(file);
+//        String originalName=file.getName();
+//
+//        ResultEntity<String> stringResultEntity = upLoadFileToOSS
+//                (endPoint, accessKeyId, accessKeySecret, inputStream,
+//                        bucketName, bucketDomain, originalName);
+//        System.out.println(stringResultEntity);
+//
+//    }
 
 
 

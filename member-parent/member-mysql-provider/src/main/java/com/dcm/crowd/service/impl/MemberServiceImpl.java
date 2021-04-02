@@ -26,11 +26,11 @@ public class MemberServiceImpl implements MemberService {
 
     public MemberPO getMemberPOByLoginAcct(String loginacct) {
         MemberPOExample example=new MemberPOExample();
-        example.createCriteria().andLoginacctLike(loginacct);
+        example.createCriteria().andLoginacctEqualTo(loginacct);
         List<MemberPO> memberPOs = memberPOMapper.selectByExample(example);
 
 
-        System.out.println(memberPOs==null);
+//        System.out.println(memberPOs==null);
 
         return memberPOs.get(0);
 

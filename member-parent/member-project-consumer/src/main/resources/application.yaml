@@ -1,0 +1,26 @@
+server:
+  port: 5000
+spring:
+  application:
+    name: projectConsumer
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+  session:
+    store-type: redis
+  redis:
+    host: localhost
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:1000/eureka
+
+
+
+aliyun:
+  oss:
+    access-key-id: LTAI5tEgHGM5QKja3QeYCigK
+    access-key-secret: FV9xrHucpiKiXdZR6xlVxAcorZUNeZ
+    bucket-domain: http://dcmcrowd.oss-cn-shanghai.aliyuncs.com
+    end-point: http://oss-cn-shanghai.aliyuncs.com
+    bucket-name: dcmcrowd

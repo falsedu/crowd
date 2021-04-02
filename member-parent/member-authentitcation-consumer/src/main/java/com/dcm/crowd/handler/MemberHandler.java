@@ -6,6 +6,8 @@ import com.dcm.crowd.api.MySQLRemoteService;
 import com.dcm.crowd.config.ShortMessageProperties;
 import com.dcm.crowd.constant.CrowdConstant;
 import com.dcm.crowd.entity.po.MemberPO;
+import com.dcm.crowd.entity.vo.MemberLoginVO;
+import com.dcm.crowd.entity.vo.MemberVO;
 import com.dcm.crowd.entity.vo.MemberVO;
 import com.dcm.crowd.util.ResultEntity;
 import com.dcm.crowd.api.RedisRemoteService;
@@ -14,12 +16,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.swing.*;
+import javax.servlet.http.HttpSession;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
@@ -38,6 +39,9 @@ public class MemberHandler {
 
     @Autowired
     private MySQLRemoteService mySQLRemoteService;
+
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
 
     @ResponseBody
@@ -77,10 +81,10 @@ public class MemberHandler {
 
 
 
-    @RequestMapping("/auth/do/member/register")
+    @RequestMapping("/auth/member/do/register")
     public String saveMember(MemberVO memberVO, ModelMap modelMap){
 
-        String mobile=memberVO.getMobile();
+        String mobile= memberVO.getMobile();
         String key=CrowdConstant.REDIS_CODE_PREFIX+mobile;
         ResultEntity<String> codeResultEntity=redisRemoteService.getRedisStringValueByKeyRemote(key);
         if(ResultEntity.FAILED.equals(codeResultEntity.getResult())){
@@ -104,7 +108,7 @@ public class MemberHandler {
         redisRemoteService.removeRedisKeyRemote(key);
 
 
-        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+
             String userpswd = memberVO.getUserpswd();
             userpswd=bCryptPasswordEncoder.encode(userpswd);
             memberVO.setUserpswd(userpswd);
@@ -131,6 +135,41 @@ public class MemberHandler {
 
 
 
+    }
+
+
+    @RequestMapping("/auth/member/do/login")
+    public String login(@RequestParam("loginacct") String loginacct, @RequestParam("userpswd")String userpswd, ModelMap modelMap, HttpSession session){
+        ResultEntity<MemberPO> memberPOResultEntity = mySQLRemoteService.getMemberPOByLoginAcctRemote(loginacct);
+        if(ResultEntity.FAILED.equals(memberPOResultEntity.getResult())){
+            modelMap.addAttribute(CrowdConstant.ATTR_NAME_MESSAGE,memberPOResultEntity.getMessage());
+            return "member-login";
+        }
+
+
+        MemberPO memberPO=memberPOResultEntity.getData();
+
+        if(memberPO==null){
+            modelMap.addAttribute(CrowdConstant.ATTR_NAME_MESSAGE,CrowdConstant.MESSAGE_LOGIN_ACCT_NOT_EXISTS);
+            return "member-login";
+        }
+        if(!bCryptPasswordEncoder.matches(userpswd,memberPO.getUserpswd())){
+            modelMap.addAttribute(CrowdConstant.ATTR_NAME_MESSAGE,CrowdConstant.MESSAGE_USERPSWD_NOT_CORRECT);
+            return "member-login";
+        }
+        MemberLoginVO memberLoginVO=new MemberLoginVO(memberPO.getId(), memberPO.getUsername(), memberPO.getEmail());
+
+
+        session.setAttribute(CrowdConstant.LOGIN_MEMBER,memberLoginVO);
+
+        return "redirect:http://www.dcm.crowd.com/auth/member/to/center/page";
+    }
+
+
+    @RequestMapping("/auth/member/logout")
+    public String logout(HttpSession session,ModelMap modelMap){
+        session.removeAttribute(CrowdConstant.LOGIN_MEMBER);
+        return "portal";
     }
 
 

@@ -2,7 +2,9 @@ package com.dcm.crowd.test;
 
 
 import com.dcm.crowd.entity.po.MemberPO;
+import com.dcm.crowd.entity.vo.PortalTypeVO;
 import com.dcm.crowd.mapper.MemberPOMapper;
+import com.dcm.crowd.mapper.ProjectPOMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -15,6 +17,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.List;
 
 
 @RunWith(SpringRunner.class)
@@ -28,6 +31,9 @@ public class MyBatisTest {
 
     @Autowired
     private MemberPOMapper memberPOMapper;
+
+    @Autowired
+    private ProjectPOMapper projectPOMapper;
 
 
     private Logger logger= LoggerFactory.getLogger(MyBatisTest.class);
@@ -55,4 +61,7 @@ public class MyBatisTest {
         memberPOMapper.insert(memberPO);
 
     }
+
+
+
 }

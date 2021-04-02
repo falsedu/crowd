@@ -4,6 +4,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+
+
+    <properties>
+        <!-- 修改JDK的编译版本为1.8 -->
+        <java.version>1.8</java.version>
+    </properties>
     <groupId>com.dcm</groupId>
     <artifactId>member-parent</artifactId>
     <packaging>pom</packaging>
@@ -67,8 +73,12 @@
                 <version>1.2.75</version>
             </dependency>
 
-
-
+            <!-- https://mvnrepository.com/artifact/com.alipay.sdk/alipay-sdk-java -->
+            <dependency>
+                <groupId>com.alipay.sdk</groupId>
+                <artifactId>alipay-sdk-java</artifactId>
+                <version>3.3.49.ALL</version>
+            </dependency>
 
 
 
@@ -85,8 +95,20 @@
                     <fork>true</fork>
                     <addResources>true</addResources>
 
+
                 </configuration>
             </plugin>
+            <plugin>
+
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+
+
+
         </plugins>
     </build>
 

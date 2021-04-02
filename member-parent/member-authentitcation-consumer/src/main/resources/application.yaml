@@ -4,6 +4,10 @@ server:
 spring:
   application:
     name: authenticationConsumer
+  redis:
+    host: localhost
+  session:
+    store-type: redis
   thymeleaf:
     prefix: classpath:/templates/
     suffix: .html
@@ -23,5 +27,5 @@ short:
     templateId: "908e94ccf08b4476ba6c876d13f084ad"
 
 ribbon:
-  ReadTimeOut: 10000
-  ConnectTimeOut: 10000
+    ReadTimeout: 10000
+    ConnectTimeout: 10000

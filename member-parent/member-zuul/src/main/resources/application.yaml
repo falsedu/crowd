@@ -3,18 +3,33 @@ server:
 spring:
   application:
     name: zuulGateway
+  redis:
+    host: localhost
+  session:
+    store-type: redis
+
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:1000/eureka
 zuul:
-
+  ignored-services: "*"
+  sensitive-headers: "*"
   routes:
     crowd-portal:
       service-id: authenticationConsumer
       path: /**
-  ignored-services: "*"
-  sensitive-headers: "*"
+    crowd-project:
+      service-id: projectConsumer
+      path: /project/**
+    crowd-order:
+      service-id: orderConsumer
+      path: /order/**
+    crowd-pay:
+      service-id: payConsumer
+      path: /pay/**
+
+
 #      分析：
 #      1. 分析后得知/zuul的默认context-path是/zuul。
 #      2. 之所以在默认的情况下我们不加zuul也可以请求成功是因为它帮我们做了url的裁剪。
@@ -27,3 +42,6 @@ zuul:
 #      2. 配置网关zuul的统一前缀:zuul.prefix=/zuul
 #      (如果没有生效的话重启zuul服务)
 
+ribbon:
+  ReadTimeout: 10000
+  ConnectTimeout: 10000
