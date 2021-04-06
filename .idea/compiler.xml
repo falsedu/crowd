@@ -44,4 +44,18 @@
       <module name="member-zuul" target="1.8" />
     </bytecodeTargetLevel>
   </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="member-api" options="-parameters" />
+      <module name="member-authentitcation-consumer" options="-parameters" />
+      <module name="member-entity" options="-parameters" />
+      <module name="member-eureka" options="-parameters" />
+      <module name="member-mysql-provider" options="-parameters" />
+      <module name="member-order-consumer" options="-parameters" />
+      <module name="member-pay-consumer" options="-parameters" />
+      <module name="member-project-consumer" options="-parameters" />
+      <module name="member-redis-provider" options="-parameters" />
+      <module name="member-zuul" options="-parameters" />
+    </option>
+  </component>
 </project>

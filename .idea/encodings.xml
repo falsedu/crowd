@@ -1,7 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding" defaultCharsetForPropertiesFiles="UTF-8">
+    <file url="file://$PROJECT_DIR$/member-parent/member-api/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/member-parent/member-authentitcation-consumer/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/member-parent/member-entity/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/member-parent/member-eureka/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/member-parent/member-mysql-provider/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/member-parent/member-order-consumer/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/member-parent/member-pay-consumer/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/member-parent/member-project-consumer/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/member-parent/member-project-consumer/src/main/resources/templates/project-agree.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/member-parent/member-redis-provider/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/member-parent/member-zuul/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/member-parent/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/member-parent/src/main/resources" charset="UTF-8" />
     <file url="PROJECT" charset="UTF-8" />
   </component>
 </project>

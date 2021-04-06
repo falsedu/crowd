@@ -2,6 +2,7 @@ package com.dcm.crowd.handler;
 
 import com.dcm.crowd.entity.vo.AddressVO;
 import com.dcm.crowd.entity.vo.OrderProjectVO;
+import com.dcm.crowd.entity.vo.OrderVO;
 import com.dcm.crowd.service.api.OrderService;
 import com.dcm.crowd.util.ResultEntity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,7 +53,7 @@ public class OrderProviderHandler {
     }
 
 
-    @RequestMapping("/save/address/vO/remote")
+    @RequestMapping("/save/address/vo/remote")
     ResultEntity<String> saveAddressVORemote(@RequestBody AddressVO addressVO){
 
         try {
@@ -60,6 +61,22 @@ public class OrderProviderHandler {
             return ResultEntity.successWithoutData();
         }catch (Exception e){
             e.printStackTrace();
+            return ResultEntity.failed(e.getMessage());
+        }
+
+    }
+
+    @RequestMapping("/save/order/vo/remote")
+    ResultEntity<String> saveOrderRemote(@RequestBody OrderVO orderVO) {
+
+        try {
+            orderService.saveOrder(orderVO);
+
+            return ResultEntity.successWithoutData();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+
             return ResultEntity.failed(e.getMessage());
         }
 
