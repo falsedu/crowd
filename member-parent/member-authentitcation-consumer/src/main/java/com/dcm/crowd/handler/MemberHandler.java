@@ -162,7 +162,7 @@ public class MemberHandler {
 
         session.setAttribute(CrowdConstant.LOGIN_MEMBER,memberLoginVO);
 
-        return "redirect:http://www.dcm.crowd.com/auth/member/to/center/page";
+        return "redirect:http://192.168.3.54/auth/member/to/center/page";
     }
 
 

@@ -230,7 +230,7 @@
                                         <p th:if="${return.freight>0}">配送费用：[[${return.freight}]]</p>
                                         <p>预计发放时间：项目筹款成功后的[[${return.returnDate}]]天内</p>
                                         <a type="button" class="btn  btn-warning btn-lg"
-                                        th:href="'http://www.dcm.crowd.com/order/confirm/return/info/'+${detailProjectVO.projectId}+'/'+${return.returnId}">支持
+                                        th:href="'http://192.168.3.54/order/confirm/return/info/'+${detailProjectVO.projectId}+'/'+${return.returnId}">支持
                                         </a>
                                         <br><br>
                                         <p th:text="${return.content}">

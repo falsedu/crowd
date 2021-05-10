@@ -19,8 +19,8 @@ eureka:
 
 aliyun:
   oss:
-    access-key-id: LTAI5tEgHGM5QKja3QeYCigK
-    access-key-secret: FV9xrHucpiKiXdZR6xlVxAcorZUNeZ
+    access-key-id: MyAccessKeyFromAliyun
+    access-key-secret: MyAccessKeySecretFromAliyun
     bucket-domain: http://dcmcrowd.oss-cn-shanghai.aliyuncs.com
     end-point: http://oss-cn-shanghai.aliyuncs.com
     bucket-name: dcmcrowd

@@ -8,7 +8,6 @@ import com.dcm.crowd.constant.CrowdConstant;
 
 import com.dcm.crowd.entity.vo.*;
 import com.dcm.crowd.util.ResultEntity;
-import com.netflix.discovery.converters.Auto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -106,7 +105,7 @@ public class ProjectConsumerHandler {
 
         session.setAttribute(CrowdConstant.ATTR_NAME_TEMPLATE_PROJECT,projectVO);
 
-        return "redirect:http://www.dcm.crowd.com/project/return/info/page";
+        return "redirect:http://192.168.3.54/project/return/info/page";
 
 
 
@@ -188,7 +187,7 @@ public class ProjectConsumerHandler {
         }
         System.out.println(projectVO);
         session.removeAttribute(CrowdConstant.ATTR_NAME_TEMPLATE_PROJECT);
-        return  "redirect:http://www.dcm.crowd.com/project/create/success";
+        return  "redirect:http://192.168.3.54/project/create/success";
     }
 
     @RequestMapping("/portal/show/project/detail/{projectId}")

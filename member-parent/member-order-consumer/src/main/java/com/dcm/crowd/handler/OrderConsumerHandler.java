@@ -34,7 +34,7 @@ private MySQLRemoteService mySQLRemoteService;
         OrderProjectVO orderProjectVO = (OrderProjectVO) session.getAttribute("orderProjectVO");
 
         Integer returnCount=orderProjectVO.getReturnCount();
-        return "redirect:http://www.dcm.crowd.com/order/confirm/order/"+returnCount;
+        return "redirect:http://192.168.3.54/order/confirm/order/"+returnCount;
     }
 
 
