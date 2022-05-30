@@ -174,29 +174,6 @@ public class CrowdUtil {
 
     }
 
-//    public static void main(String[] args) throws FileNotFoundException {
-//        String  accessKeyId="LTAI5tEgHGM5QKja3QeYCigK";
-//        String  accessKeySecret="FV9xrHucpiKiXdZR6xlVxAcorZUNeZ";
-//        String  bucketDomain="http://dcmcrowd.oss-cn-shanghai.aliyuncs.com";
-//        String  endPoint="http://oss-cn-shanghai.aliyuncs.com";
-//        String  bucketName="dcmcrowd";
-//
-//
-//
-//
-//
-//
-//File file=new File("C:/Users/22945/Pictures/Saved Pictures/yzhh.jpg");
-//
-//        InputStream inputStream=new FileInputStream(file);
-//        String originalName=file.getName();
-//
-//        ResultEntity<String> stringResultEntity = upLoadFileToOSS
-//                (endPoint, accessKeyId, accessKeySecret, inputStream,
-//                        bucketName, bucketDomain, originalName);
-//        System.out.println(stringResultEntity);
-//
-//    }
 
 
 
